@@ -1,0 +1,245 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication1.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Kumari Cinemas</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #f5f6fa;
+            padding-top: 70px;
+        }
+
+        /* ── Navbar ── */
+        .main-navbar {
+            background: #0f1923;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 0 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+        }
+
+        .navbar-brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 12px 0;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #2d6a9f, #1e3a5f);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .brand-text {
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-text span {
+            color: #60a5fa;
+        }
+
+        /* Nav links */
+        .main-navbar .nav-link {
+            color: rgba(255,255,255,0.65) !important;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 12px !important;
+            border-radius: 8px;
+            transition: background .15s, color .15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .main-navbar .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .main-navbar .nav-link.active-link {
+            color: #ffffff !important;
+            background: rgba(45,106,159,0.4);
+        }
+
+        .main-navbar .nav-link i {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Dashboard special button */
+        .nav-dashboard {
+            background: #2d6a9f !important;
+            color: #fff !important;
+            padding: 6px 14px !important;
+            border-radius: 8px;
+            font-weight: 600 !important;
+        }
+        .nav-dashboard:hover {
+            background: #1e3a5f !important;
+            color: #fff !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Footer */
+        footer {
+            color: #9ca3af;
+            font-size: 13px;
+            text-align: center;
+            padding: 20px 0 10px;
+        }
+
+        .body-content {
+            max-width: 1200px;
+        }
+    </style>
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <!-- ── Navbar ── -->
+        <nav class="main-navbar navbar navbar-expand-lg">
+            <div class="container">
+
+                <!-- Brand -->
+                <a class="navbar-brand-wrap" runat="server" href="~/">
+                    <div class="brand-icon">
+                        <i class="bi bi-camera-reels-fill"></i>
+                    </div>
+                    <span class="brand-text">Kumari<span>Cinemas</span></span>
+                </a>
+
+                <!-- Mobile toggle -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+                    data-bs-target="#mainNav" aria-controls="mainNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-dashboard" runat="server" href="~/">
+                                <i class="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/User">
+                                <i class="bi bi-people-fill"></i> Users
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Movie">
+                                <i class="bi bi-film"></i> Movies
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Theaterhall">
+                                <i class="bi bi-building"></i> Halls
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Show">
+                                <i class="bi bi-play-circle"></i> Shows
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Ticket">
+                                <i class="bi bi-ticket-perforated"></i> Tickets
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/UserTicket">
+                                <i class="bi bi-person-lines-fill"></i> User Tickets
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/TheaterMovie">
+                                <i class="bi bi-camera-reels"></i> Theater Movies
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/MovieTheaterPerformance">
+                                <i class="bi bi-trophy"></i> Movie Performance
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ── Page Content ── -->
+        <div class="container body-content mt-2">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr style="border-color:#e9ecef;" />
+            <footer>
+                <p>&copy; 2025 - KumariCinemas. All rights reserved.</p>
+            </footer>
+        </div>
+            
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
